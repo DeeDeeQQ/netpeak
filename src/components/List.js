@@ -14,6 +14,6 @@ export default connect(
     data: state.postList
   }),
   dispatch => ({
-    postList: () => dispatch({ type: "GET_NEW_POSTS" })
+    postList: () => dispatch({ type: "API_CALL_REQUEST" })
   })
 )(withRouter(List));
