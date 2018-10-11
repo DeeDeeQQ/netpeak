@@ -1,4 +1,4 @@
-const API_CALL_REQUEST = "API_CALL_REQUEST_LIST";
+const API_CALL_REQUEST = "API_CALL_REQUEST_POST";
 const API_CALL_SUCCESS = "API_CALL_SUCCESS";
 const API_CALL_FAILURE = "API_CALL_FAILURE";
 
@@ -8,7 +8,7 @@ const initialState = {
   error: null
 };
 
-export default function postList(state = initialState, action) {
+export default function post(state = initialState, action) {
   switch (action.type) {
     case API_CALL_REQUEST:
       return { ...state, fetching: true, error: null };
