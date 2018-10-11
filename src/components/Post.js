@@ -12,7 +12,37 @@ class Post extends Component {
   render() {
     const { fetching, data, error } = this.props;
     const { comments, post, user } = { ...data };
-    return <div>{data && console.log(user)}</div>;
+
+    return (
+      <div>
+        {fetching ? (
+          <div>Loading...</div>
+        ) : (
+          data && (
+            <MainPostDiv>
+              <UserInfoDiv>
+                <span>{user.username}</span>
+                <span>{user.email}</span>
+              </UserInfoDiv>
+              <PostDiv>
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
+              </PostDiv>
+              {comments.map(comment => (
+                <CommentsDiv key={comment.id}>
+                  <div>
+                    <span>{comment.name}</span>
+                    <span>{comment.email}</span>
+                  </div>
+                  <p>{comment.body}</p>
+                </CommentsDiv>
+              ))}
+            </MainPostDiv>
+          )
+        )}
+        {error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
+      </div>
+    );
   }
 }
 
@@ -30,3 +60,11 @@ export default connect(
       })
   })
 )(withRouter(Post));
+
+const MainPostDiv = styled("div")``;
+
+const PostDiv = styled("div")``;
+
+const UserInfoDiv = styled("div")``;
+
+const CommentsDiv = styled("div")``;

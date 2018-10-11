@@ -9,7 +9,7 @@ class List extends Component {
     this.props.postList();
   }
   render() {
-    const { fetching, data, error } = this.props;
+    const { fetching, data, error } = this.props; //fetching time < 300ms so I skip adding some indication in render
     return (
       <ListDiv>
         {data &&

@@ -17,9 +17,9 @@ function* workerSagaList() {
   try {
     const response = yield call(getList);
     const data = response.data;
-    yield put({ type: "API_CALL_SUCCESS", data });
+    yield put({ type: "API_CALL_SUCCESS_LIST", data });
   } catch (error) {
-    yield put({ type: "API_CALL_FAILURE", error });
+    yield put({ type: "API_CALL_FAILURE_LIST", error });
   }
 }
 
@@ -60,8 +60,8 @@ function* workerSagaPost(action) {
     const data = { post, comments, user };
     console.log(data);
 
-    yield put({ type: "API_CALL_SUCCESS", data });
+    yield put({ type: "API_CALL_SUCCESS_POST", data });
   } catch (error) {
-    yield put({ type: "API_CALL_FAILURE", error });
+    yield put({ type: "API_CALL_FAILURE_POST", error });
   }
 }
