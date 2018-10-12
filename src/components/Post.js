@@ -14,17 +14,17 @@ class Post extends Component {
     const { comments, post, user } = { ...data };
 
     return (
-      <div>
+      <WraperDiv>
         {fetching ? (
           <div>Loading...</div>
         ) : (
           data && (
             <MainPostDiv>
-              <UserInfoDiv>
-                <span>{user.username}</span>
-                <span>{user.email}</span>
-              </UserInfoDiv>
               <PostDiv>
+                <UserInfoDiv>
+                  <span>{user.username}</span>
+                  <span>{user.email}</span>
+                </UserInfoDiv>
                 <h2>{post.title}</h2>
                 <p>{post.body}</p>
               </PostDiv>
@@ -41,7 +41,7 @@ class Post extends Component {
           )
         )}
         {error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
-      </div>
+      </WraperDiv>
     );
   }
 }
@@ -61,10 +61,30 @@ export default connect(
   })
 )(withRouter(Post));
 
+const WraperDiv = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const MainPostDiv = styled("div")``;
 
-const PostDiv = styled("div")``;
+const PostDiv = styled("div")`
+  border: 1px solid black;
+  & > h2 {
+    text-transform: uppercase;
+    background-color: #c2c2c2;
+    margin-top: 0;
+  }
+`;
 
-const UserInfoDiv = styled("div")``;
+const UserInfoDiv = styled("div")`
+  display: flex;
+  background-color: #c2c2c2;
+  align-self: center;
+  justify-content: space-between;
+`;
 
-const CommentsDiv = styled("div")``;
+const CommentsDiv = styled("div")`
+  border: 1px solid black;
+  margin: 10px 0 0 30px;
+`;
