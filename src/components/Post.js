@@ -14,7 +14,7 @@ class Post extends Component {
     const { comments, post, user } = { ...data };
 
     return (
-      <WraperDiv>
+      <WrapperDiv>
         {fetching ? (
           <div>Loading...</div>
         ) : (
@@ -42,7 +42,7 @@ class Post extends Component {
           )
         )}
         {error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
-      </WraperDiv>
+      </WrapperDiv>
     );
   }
 }
@@ -62,7 +62,7 @@ export default connect(
   })
 )(withRouter(Post));
 
-const WraperDiv = styled("div")`
+const WrapperDiv = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;

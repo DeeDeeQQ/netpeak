@@ -58,7 +58,6 @@ function* workerSagaPost(action) {
     const user = userResponse.data;
 
     const data = { post, comments, user };
-    console.log(data);
 
     yield put({ type: "API_CALL_SUCCESS_POST", data });
   } catch (error) {
