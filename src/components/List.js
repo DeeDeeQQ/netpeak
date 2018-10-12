@@ -8,10 +8,23 @@ class List extends Component {
   componentDidMount() {
     this.props.postList();
   }
+
+  onFilter() {
+    this.props.onFilter(this.searchInput.value.toLocaleLowerCase());
+  }
+
   render() {
-    const { fetching, data, error } = this.props; //fetching time < 300ms so I skip adding some indication in render
+    const { data, error } = this.props; //fetching time < 300ms so I skip adding some indication in render
+
     return (
       <ListDiv>
+        <input
+          type="text"
+          ref={input => {
+            this.searchInput = input;
+          }}
+        />
+        <button onClick={this.onFilter.bind(this)}>Search</button>
         {data &&
           data.map(data => (
             <Link to={`/post/${data.id}`} key={data.id}>
@@ -19,6 +32,7 @@ class List extends Component {
               <p>{data.body}</p>
             </Link>
           ))}
+        {error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
       </ListDiv>
     );
   }
@@ -27,11 +41,21 @@ class List extends Component {
 export default connect(
   state => ({
     fetching: state.postList.fetching,
-    data: state.postList.data,
+    data:
+      state.postList.data &&
+      state.postList.data.filter(
+        post =>
+          post.title.includes(state.filter) || post.body.includes(state.filter)
+      ),
     error: state.postList.error
   }),
   dispatch => ({
-    postList: () => dispatch({ type: "API_CALL_REQUEST_LIST" })
+    postList: () => dispatch({ type: "API_CALL_REQUEST_LIST" }),
+    onFilter: searchPhrase =>
+      dispatch({
+        type: "FILTER_REQUEST",
+        payload: searchPhrase
+      })
   })
 )(withRouter(List));
 
