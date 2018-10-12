@@ -20,6 +20,7 @@ class Post extends Component {
         ) : (
           data && (
             <MainPostDiv>
+              <Link to="/">Go back</Link>
               <PostDiv>
                 <UserInfoDiv>
                   <span>{user.username}</span>
