@@ -144,4 +144,9 @@ const UserInfoDiv = styled("div")`
 const CommentsDiv = styled("div")`
   border: 1px solid black;
   margin: 10px 0 0 30px;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    background-color: #c2c2c2;
+  }
 `;
